@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Current player :  <span class="current_player"></span> </h2>
+        <div class="box">
+            <button class="square" id="0"> <h3></h3> </button>
+            <button class="square" id="1"> <h3></h3> </button>
+            <button class="square" id="2"> <h3></h3> </button>
+            <button class="square" id="3"> <h3></h3> </button>
+            <button class="square" id="4"> <h3></h3> </button>
+            <button class="square" id="5"> <h3></h3> </button>
+            <button class="square" id="6"> <h3></h3> </button>
+            <button class="square" id="7"> <h3></h3> </button>
+            <button class="square" id="8"> <h3></h3> </button>
+        </div>
+    </div>
+</body>
+<script>
+    let game_data = []
+
+    curr_player = document.querySelector('.current_player')
+    
+    current_player_variable = 'X'
+    curr_player.innerText = current_player_variable
+
+
+    box = document.querySelectorAll('.box .square')
+    console.log(box);
+
+    box.forEach(element => {
+        element.addEventListener('click', ()=>{
+            console.log(element.getAttribute('id'))
+            console.log(game_data);
+
+            if ( current_player_variable == 'X' ){
+                game_data[element.getAttribute('id')] = 'X'
+                element.innerText = 'X'
+                
+                change_turn()
+                check()
+            }
+            else if ( current_player_variable == 'O' ){
+                game_data[element.getAttribute('id')] = 'O'
+                element.innerText = 'O'
+                
+                change_turn()
+                check()
+            }
+        })
+    });
+
+    function change_turn(){
+        if ( current_player_variable == 'X' ){
+            current_player_variable = "O"
+            curr_player.innerText = "O"
+        }
+        else{
+            current_player_variable = "X"
+            curr_player.innerText = "X"
+        }
+    }
+
+    function check(){
+        if ( game_data[0] == game_data[1] && game_data[1] == game_data[2] && game_data[0] == 'X' ){
+            curr_player.innerText = 'X is the winner'
+        }
+    }
+</script>
+</html>
